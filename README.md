@@ -64,6 +64,9 @@ k3d-mycluster-agent-0    Ready    <none>                 113s   v1.27.4+k3s1
 k3d-mycluster-agent-1    Ready    <none>                 112s   v1.27.4+k3s1
 ```
 
+### Import image locally (no need for dockerhub)
+`./bin/k3d-linux image import tamunetcompany/nc-k8s-ws:1.0.0 --cluster mycluster`
+
 ## Deploy application to kubernetes
 Interaction with kubernetes is normally done using the cli tool `kubectl` and the same applies for deployment. Open powershell inside the directory `application/k8s-simple` and run `..\..\bin\kubectl.exe apply -k .`. 
 
