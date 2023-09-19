@@ -6,25 +6,26 @@ To start the build process, run the following command from within the "applicati
 
 This will build the docker container in the current directory and tag it with according to the parameter defined in `-t`. An example of a real world build is: 
 
-`docker build -t tamunetcompany/nc-k8s-ws:1.0.0 .`
+`docker build -t nctamu/nc-k8s-ws:1.0.0 .`
 
-This builds a container under the `tamunetcompany` user under the `nc-k8s-ws` repository on docker hub and tagged with version 1.0.0
+This builds a container under the `nctamu` user under the `nc-k8s-ws` repository on docker hub and tagged with version 1.0.0
 
 ## Push the docker container
 When the container image is built, it needs to be pushed to docker hub. This can be done by running:
 
 `docker push \_docker\_hub\_username\_/\_name\_of\_container\_:\_version\_`
 
-Example: `docker push tamunetcompany/nc-k8s-ws:1.0.0`
+Example: `docker push nctamu/nc-k8s-ws:1.0.0`
 
 This will push the image to docker hub and look like this:
 
 ```
-The push refers to repository [docker.io/tamunetcompany/nc-k8s-ws]
-efeb58a2f8ee: Pushing [=====================>                             ]  8.946MB/20.89MB
-dc9fa3d8b576: Layer already exists
-27ee19dc88f2: Layer already exists
-c8dd97366670: Layer already exists
+docker push nctamu/nc-k8s-ws:1.0.0
+The push refers to repository [docker.io/nctamu/nc-k8s-ws]
+0714e7311bcd: Pushed
+dc9fa3d8b576: Mounted from library/openjdk
+27ee19dc88f2: Mounted from library/openjdk
+c8dd97366670: Mounted from library/openjdk
 ```
 
 If the system complains about missing login, you need to run:
@@ -40,7 +41,7 @@ The container can be started immediately after the image is built locally so it 
 
 `docker run -it -p 8080:8080 \_docker\_hub\_username\_/\_name\_of\_container\_:\_version\_`
 
-Example: `docker run -it -p 8080:8080 tamunetcompany/nc-k8s-ws:1.0.0` 
+Example: `docker run -it -p 8080:8080 nctamu/nc-k8s-ws:1.0.0` 
 
 Then the application can be accessed on: `http://app.127.0.0.1.nip.io:8080/`
 
@@ -65,7 +66,7 @@ k3d-mycluster-agent-1    Ready    <none>                 112s   v1.27.4+k3s1
 ```
 
 ### Import image locally (no need for dockerhub)
-`./bin/k3d-linux image import tamunetcompany/nc-k8s-ws:1.0.0 --cluster mycluster`
+`./bin/k3d-linux image import nctamu/nc-k8s-ws:1.0.0 --cluster mycluster`
 
 ## Deploy application to kubernetes
 Interaction with kubernetes is normally done using the cli tool `kubectl` and the same applies for deployment. Open powershell inside the directory `application/k8s-simple` and run `..\..\bin\kubectl.exe apply -k .`. 

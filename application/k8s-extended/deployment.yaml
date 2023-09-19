@@ -19,7 +19,7 @@ spec:
           persistentVolumeClaim:
             claimName: application-pv-claim
       containers:
-        - image: tamunetcompany/nc-k8s-ws:1.0.0
+        - image: nctamu/nc-k8s-ws:1.0.0
           imagePullPolicy: IfNotPresent
           name: application-pod
           ports:
