@@ -53,13 +53,13 @@ Then the application can be accessed on: `http://app.127.0.0.1.nip.io:8080/`
 # Kubernetes session
 
 ## Starting local kubernetes cluster
-To start a local kubernetes cluster based on the k3d distribution, run the following command in the current directory from powershell
+To start a local kubernetes cluster based on the k3d distribution, run the following command in the project root directory from powershell
 
-`..\bin\k3d.exe cluster create --config .\config.yml`
+`.\bin\k3d.exe cluster create --config .\config.yml`
 
 When the cluster is started, check that you are able to communicate with the cluster by retrieving a list of all active nodes in the cluster:
 
-`..\bin\kubectl.exe get nodes`
+`.\bin\kubectl.exe get nodes`
 
 which should yield a result like this:
 ```
@@ -70,7 +70,7 @@ k3d-mycluster-agent-1    Ready    <none>                 112s   v1.27.4+k3s1
 ```
 
 ### Import image locally (no need for dockerhub)
-`../bin/k3d-linux image import nctamu/nc-k8s-ws:1.0.0 --cluster mycluster`
+`./bin/k3d-linux image import nctamu/nc-k8s-ws:1.0.0 --cluster mycluster`
 
 ## Deploy application to kubernetes
 Interaction with kubernetes is normally done using the cli tool `kubectl` and the same applies for deployment. Open powershell inside the directory `application/k8s-simple` and run `..\..\bin\kubectl.exe apply -k .`. 
