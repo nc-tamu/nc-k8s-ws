@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  SPRING_PROFILES_ACTIVE: production
+  IN_K8S: "true"
+kind: ConfigMap
+metadata:
+  labels:
+    app: application
+  name: application-config-map
