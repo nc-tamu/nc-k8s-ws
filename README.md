@@ -4,13 +4,13 @@
 
 # Docker session
 ## Build the application docker container
-To start the build process, run the following command from within the "application" folder:
+To start the build process, run the following command which targets the 'application' folder:
 
-`docker build -t docker-hub-username/name-of-container:version .`
+Example: `docker build -t docker-hub-username/name-of-container:version application\.`
 
 This will build the docker container in the current directory and tag it with according to the parameter defined in `-t`. An example of a real world build is: 
 
-`docker build -t nctamu/nc-k8s-ws:1.0.0 .`
+`docker build -t nctamu/nc-k8s-ws:1.0.0 application\.`
 
 This builds a container under the `nctamu` user under the `nc-k8s-ws` repository on docker hub and tagged with version 1.0.0
 
@@ -49,7 +49,6 @@ Example: `docker run -it -p 8080:8080 nctamu/nc-k8s-ws:1.0.0`
 
 Then the application can be accessed on: `http://app.127.0.0.1.nip.io:8080/`
 
-
 # Kubernetes session
 
 ## Starting local kubernetes cluster
@@ -69,11 +68,11 @@ k3d-mycluster-agent-0    Ready    <none>                 113s   v1.27.4+k3s1
 k3d-mycluster-agent-1    Ready    <none>                 112s   v1.27.4+k3s1
 ```
 
-### Import image locally (no need for dockerhub)
-`./bin/k3d-linux image import nctamu/nc-k8s-ws:1.0.0 --cluster mycluster`
+### Import image locally (if not using dockerhub)
+`./bin/k3d.exe image import nctamu/nc-k8s-ws:1.0.0 --cluster mycluster`
 
 ## Deploy application to kubernetes
-Interaction with kubernetes is normally done using the cli tool `kubectl` and the same applies for deployment. Open powershell inside the directory `application/k8s-simple` and run `..\..\bin\kubectl.exe apply -k .`. 
+Interaction with kubernetes is normally done using the cli tool `kubectl` and the same applies for deployment. Open powershell again in the root directory and run `.\bin\kubectl.exe apply -k .\application\k8s-simple\`
 
 This will read the "kustomize.yaml" file and deploy it to the current cluster. 
 
@@ -81,7 +80,7 @@ Ps. "Kustomize" is just another tool to help us merge multiple kubernetes config
 
 The result looks like this:
 ```
-PS C:\...\k8s\application\k8s-simple> ..\..\bin\kubectl.exe apply -k .
+PS C:\...\k8s> .\bin\kubectl.exe apply -k .\application\k8s-simple\
 service/application-svc created
 deployment.apps/application-deployment created
 ingress.networking.k8s.io/application-ingress created
@@ -91,7 +90,7 @@ To check if everything has started, the following commands can be executed.
 
 Get pods:
 ```
-PS C:\...\k8s\application\k8s-simple> ..\..\bin\kubectl.exe get pods
+PS C:\...\k8s> .\bin\kubectl.exe get pods
 NAME                                     READY   STATUS    RESTARTS   AGE
 application-deployment-cd6bb685b-c4pl6   1/1     Running   0          2m7s
 ```
@@ -99,23 +98,54 @@ application-deployment-cd6bb685b-c4pl6   1/1     Running   0          2m7s
 
 Get services:
 ```
-PS C:\...\k8s\application\k8s-simple> ..\..\bin\kubectl.exe get svc
+PS C:\...\k8s> .\bin\kubectl.exe get svc
 NAME              TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
 application-svc   ClusterIP   10.43.223.85   <none>        8080/TCP   2m17s
 ```
 
 Get Ingress:
 ```
-PS C:\...\k8s\application\k8s-simple> ..\..\bin\kubectl.exe get ingress
+PS C:\...\k8s> .\bin\kubectl.exe get ingress
 NAME                  CLASS     HOSTS                  ADDRESS                            PORTS   AGE
 application-ingress   traefik   app.127.0.0.1.nip.io   172.19.0.3,172.19.0.4,172.19.0.5   80      2m29s
 ```
 
-In this scenario it will now be possible to open the url `http://app.127.0.0.1.nip.io:8080/` in your browser and see the hostname of the container serving the request. 
+In this scenario it will now be possible to open the url `http://app.127.0.0.1.nip.io:8080/` in your browser and see the hostname of the container serving the request just like in the first example. 
 
 Ps. the reason for adding port `:8080` is because we configured the port `8080` to be mapped to port `80` inside the cluster, see `config.yml` so this is just applicable for this local environment.
 
-### Change probe for application via cli
+Notice how there is now more information displayed. Now you can see the pods inside the namespace as well as the health status of them.
+
+### Change probe for application via browser
+To toggle the liveness value of the pod, click the `Toggle Liveness on Random pod` button and then the `Refresh Page` button. You should see that the pod has changed from GOOD to BAD. This indicates that the application is not healthy. Wait 30 seconds and refresh the page again. Now you should see that it is GOOD again.
+
+Tip, if you can, have your terminal and browser side by side.
+
+This is because Kubernetes automatically detected the BAD state and restarted the application. If you get pods again you can see that the restart counter has gone up!
+
+```
+PS C:\...\k8s> .\bin\kubectl.exe get pods
+NAME                                     READY   STATUS    RESTARTS     AGE
+application-deployment-cd6bb685b-c4pl6   1/1     Running   1 (14s ago)  2m7s
+```
+
+You can also `describe` the pod to see details of what happened:
+```
+PS C:\...\k8s> .\bin\kubectl.exe descibe pods application-deployment-cd6bb685b-c4pl6
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  8m51s                default-scheduler  Successfully assigned
+  Warning  Unhealthy  41s (x3 over 61s)    kubelet            Liveness probe failed: HTTP probe failed with statuscode: 500
+  Normal   Killing    41s                  kubelet            Container application-pod failed liveness probe, will be restarted
+  Normal   Pulled     40s (x2 over 8m51s)  kubelet            Container image "nctamu/nc-k8s-ws:1.0.0" already present on machine
+  Normal   Created    40s (x2 over 8m51s)  kubelet            Created container application-pod
+  Normal   Started    40s (x2 over 8m51s)  kubelet            Started container application-pod
+```
+
+Notice how it reports that the application had `Liveness probe failed`. This is because we defined the endpoint of the application to checks its health on /liveness, but since we forced it to report code 500, Kubernetes thinks it is unhealthy.
+
+### Change probe for application via cli (if you want to try)
 To check and toggle the value of `liveness` using `curl`, follow these steps:
 
 Step 1: Start the Spring Boot Application
@@ -164,6 +194,26 @@ Invoke-RestMethod -Uri 'http://localhost:PORT/liveness' -Method Get -Verbose
 This time, it should return the opposite response compared to what you received in Step 3.
 
 You can repeat Steps 4 and 5 to toggle and check the liveness status as many times as you want. Keep in mind that `liveness` will toggle its value with each POST request.
+
+## Scale the application
+Having application redundancy is important for stability. Now we will try to scale the application to more instances:
+```
+PS C:\...\k8s> .\bin\kubectl.exe scale deployment application-deployment --replicas=2
+deployment.apps/application-deployment scaled
+```
+
+```
+PS C:\...\k8s> .\bin\kubectl.exe get pods
+NAME                                      READY   STATUS    RESTARTS        AGE
+application-deployment-6994ccd745-rmpr8   1/1     Running   1 (4m31s ago)   12m
+application-deployment-6994ccd745-9psb9   1/1     Running   0               26s
+```
+
+As seen above the application now has two replicas. If you visit http://app.127.0.0.1.nip.io:8080/ again you will notice that it now also lists the second application.
+
+You can now try to change the liveness once and refresh the page. Now only one instance will be BAD, however, the application is still available since it has two running replicas!
+
+Using multiple replicas is a good way to scale your application horizontally but beware not to scale too much as it will use a lot of resources if not done properly.
 
 ## Pretty overview of kubernetes (K9S)
 To get an easy overview of what is running in your cluster, the tool `k9s` is one of many good tools to interact with the cluster and see what is running. 
