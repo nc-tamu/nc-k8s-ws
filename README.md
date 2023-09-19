@@ -1,3 +1,7 @@
+# Prerequisites
+* Docker desktop: https://www.docker.com/products/docker-desktop/
+* Dockerhub account: https://hub.docker.com/
+
 # Docker session
 ## Build the application docker container
 To start the build process, run the following command from within the "application" folder:
