@@ -2,7 +2,7 @@
 ## Build the application docker container
 To start the build process, run the following command from within the "application" folder:
 
-`docker build -t \_docker\_hub\_username\_/\_name\_of\_container\_:\_version\_ .`
+`docker build -t docker-hub-username/name-of-container:version .`
 
 This will build the docker container in the current directory and tag it with according to the parameter defined in `-t`. An example of a real world build is: 
 
@@ -13,7 +13,7 @@ This builds a container under the `nctamu` user under the `nc-k8s-ws` repository
 ## Push the docker container
 When the container image is built, it needs to be pushed to docker hub. This can be done by running:
 
-`docker push \_docker\_hub\_username\_/\_name\_of\_container\_:\_version\_`
+`docker push docker-hub-username/name-of-container:version`
 
 Example: `docker push nctamu/nc-k8s-ws:1.0.0`
 
@@ -39,7 +39,7 @@ Ps. if using a private registry, it will be necessary to provide the full url to
 ## Start the docker container locally
 The container can be started immediately after the image is built locally so it is not required to be pushed to an external registry. To start the application locally, use the following command:
 
-`docker run -it -p 8080:8080 \_docker\_hub\_username\_/\_name\_of\_container\_:\_version\_`
+`docker run -it -p 8080:8080 docker-hub-username/name-of-container:version`
 
 Example: `docker run -it -p 8080:8080 nctamu/nc-k8s-ws:1.0.0` 
 
