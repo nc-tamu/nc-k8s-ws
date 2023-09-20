@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="data:image/x-icon;base64,AAABAAEAICAAAAEAIACoEAAAFgAAACgAAAAgAAAAQAAAAAEAIAAAAAAAABAAAMMOAADDDgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOlqNRjkbDJz5GwyiORsMojkbDKI5GwyiORsMojkbDKI5GwyiORsMojkbDKI5GwyiORsMojkbDKI5GsxculqNRgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADkaTQd5mwy5OVsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5mwy5ORpNB0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA318/COVrMcnlbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5WsxzuVmMwoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADlazKd5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5GsyowAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA5WsycOVsMv/lbDL/5Wwy/+VsMv/pglH/6otd/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/6opc/+mCUf/lbDL/5Wwy/+VsMv/lbDL/5WsybwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOVqMzzlbDH65Wwy/+VsMv/lbDL/5Wwy//Gujv/87+n/5W00/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VtNP/87uj/8a+Q/+VsMv/lbDL/5Wwy/+VsMv/kazD7420yQQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADmajEf5Gsy6uVsMv/lbDL/5Wwy/+VsMv/lbDL/5nI6//zu5//slWv/5Wwy/+ZzPP/qh1f/6odX/+Z0Pf/lbDL/7JZs//zv6P/mcjv/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/mazHt6Gk0IgAAAAAAAAAAAAAAAAAAAAAAAAAA4nE4CeRrMszlbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/8rWX//328v/64tf///7+//////////////////rl2//99fH/8raa/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/mazLQ53MuCwAAAAAAAAAAAAAAAAAAAADkazKm5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+qLXf/76uL///////78+v/53dD/9MSs//XIs//418f//vv5///////87uf/645h/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/kbDKs/wAAAQAAAAAAAAAA5GwydeVsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/skWX//vn3///9/P/88Or//vz6/+mBT//lbDL/5Wwy/+h/Tf/++/n//PDq//78+//++/n/7JRp/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/kazJ0AAAAAOVtMkbkbDD85Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/6HxI//328v/++vj/7JRp/+6ge///////9s+7/+VsMv/lbDL/9s25///////von7/7JFl//759//++PX/6H1K/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+RsMPzlazNF5Gsx1+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/2zLj//////++ifv/lbDL/5nA4//3y7f///v7/641h/+uMXv///v7//fPv/+ZxOP/lbDL/7qB6///////2z7v/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+RsMtTmbDLu5Wwy/+VsMv/lbDL/76eF//XGr//slm3/7JFl///9/P/54NT/5Wwy/+VsMv/lbDL/87qf///////98u3//fLt///////zvKL/5Wwy/+VsMv/lbDL/+d7Q///9/f/rkGX/7JRp//TDq//vpoP/5Wwy/+VsMv/lbDL/5mwy7uVsMb/lbDL/5Wwy/+VsMv/tl23/9s25//rj2P////////////318f/42Mj/9L+m/++mg//2y7f///////////////////////bLtv/vpIH/872j//jWxv/99PD////////////65dv/99C9/+2Yb//lbDL/5Wwy/+VsMv/lbDG/5WwyhOVsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy//bKtf///////Ovk/////////////////////////v7/8a+P//Gvj////v7///////////////////////zt5v//////9sy4/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMoTjajNK5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/9ciy///////ofUr/6H1K/++nhf/42sz///////zu6P/lbDL/5Wwy//zv6P//////+d3Q//CqiP/of03/6H5L///////1yLL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5mwwSd9vLxDkazL95Wwy/+VsMv/lbDL/5Wwy/+VsMv/zvaP//////+qJWv/lbDL/5Wwy/+uNYf////////////TErP/0xKz////////////rjF7/5Wwy/+VsMv/qi13///////O8ov/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+RsMv7icTgSAAAAAORsMtTlbDL/5Wwy/+VsMv/lbDL/5Wwy/++kgf//////8KqJ/+VsMv/rjF7//fPu//////////////////////////////////3y7f/qi13/5Wwy//Gtjf//////76J+/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Gsx0wAAAAAAAAAA5GwxmeVsMv/lbDL/5Wwy/+VsMv/lbDL/53lE///9/P/65Nr/7Zhw//759v//////99PC/++kgf///////////++mgv/41cX///////749f/tl27/++fd//78+//ndkD/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lazKYAAAAAAAAAADjbDBe5Wwy/+VsMv/lbDL/5Wwy/+VsMv/lbDL/9cWv/////////v7//vr4//Cph//lbTP/5W0z///9/f///v3/5W0z/+VtM//wq4r//vr5///+/v//////9MKr/+VsMv/lbDL/5Wwy/+VsMv/lbDL/5Wwy/+ZqMV0AAAAAAAAAAOJqMSTlbDL/5Wwy/+VsMv/lbDL/5Wwy/+VsMv/wq4r////////////yuJv/5Wwy/+VsMv/lbDL//fXx//328v/lbDL/5Wwy/+Vs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" rel="icon" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker/k8s Demo</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <!-- Normal section -->
+    <h1>Hostname: <span th:text="${hostname}"></span></h1>
+    <p class="descriptionText">If you see this, your application is running!</p>
+    <hr>
+
+    <!-- Kubernetes section -->
+    <div th:if="${podStatusMap != null and not #vars['podStatusMap'].empty}">
+        <p class="descriptionText">The following below is used when the application is deployed to Kubernetes</p>
+        <hr>
+        <p class="statusText">Liveness Status: <span id="status" th:text="${statusText}" th:style="'color:' + ${statusColor}"></span></p>
+
+        <h2>Pods Status:</h2>
+        <ul>
+            <li th:each="entry : ${podStatusMap}">
+                <span th:text="${entry.key}"></span> -
+                <span th:text="${entry.value}" th:attr="data-status=${entry.value}"></span>
+            </li>
+        </ul>
+        <div th:if="${podStatusMap == null or #vars['podStatusMap'].empty}">
+            <p>No pod status information available.</p>
+        </div>
+
+        <form method="post" action="/toggleLiveness" onsubmit="toggleLiveness(event)">
+            <input type="submit" class="customButton" value="Toggle Liveness on Random pod">
+        </form>
+        <button class="customButton" onclick="refreshPage()">Refresh Page</button>
+        <hr>
+    </div>
+
+    <script>
+        function refreshPage() {
+            location.reload(); // Reload the page
+        }
+
+        async function toggleLiveness(event) {
+            event.preventDefault(); // Prevents the default form submission behavior
+            console.log('Button clicked'); // Log a message to see if the button click event is being triggered
+            await fetch('/liveness', { method: 'POST' });
+            getStatus();
+        }
+
+        async function getStatus() {
+            let response = await fetch('/liveness');
+            let status = response.status;
+            let statusText;
+            let statusColor;
+            if (status === 200) {
+                statusText = 'GOOD';
+                statusColor = 'green';
+            } else {
+                statusText = 'BAD';
+                statusColor = 'red';
+            }
+            document.getElementById('status').innerText = statusText;
+            document.getElementById('status').style.color = statusColor;
+        }
+
+        getStatusK8sPod();
+        async function getStatusK8sPod() {
+            let listItems = document.querySelectorAll('ul li');
+
+            listItems.forEach(function(item) {
+                let status = item.querySelector('span[data-status]').getAttribute('data-status');
+                let statusText;
+                let statusColor;
+                if (status === 'GOOD') {
+                    statusText = 'GOOD';
+                    statusColor = 'green';
+                } else {
+                    statusText = 'BAD';
+                    statusColor = 'red';
+                }
+                item.querySelector('span[data-status]').innerText = statusText;
+                item.querySelector('span[data-status]').style.color = statusColor;
+            });
+        }
+    </script>
+</body>
+</html>

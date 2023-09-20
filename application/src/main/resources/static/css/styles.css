@@ -1,0 +1,52 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+}
+.customButton {
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding */
+    border: none; /* No border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor */
+    margin-top: 10px; /* Add margin space at the top */
+    transition: background-color 0.3s;
+}
+.customButton:hover {
+    background-color: #45a049;
+}
+.statusText {
+    font-size: 24px;
+    font-weight: bold;
+}
+.descriptionText {
+    font-size: 16px;
+    font-weight: bold;
+}
+.build-info {
+    font-size: 0.9em;
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+h2 {
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+li {
+    margin-bottom: 8px;
+}
+span.key {
+    font-weight: bold;
+}
+span.value {
+    color: green;
+}
