@@ -1,6 +1,8 @@
 # Prerequisites
-* Docker desktop: https://www.docker.com/products/docker-desktop/
+* docker to be able to use k3d at all <br> Note: k3d v5.x.x requires at least Docker v20.10.5 (runc >= v1.0.0-rc93) to work properly (see #807)
+  * Docker desktop: https://www.docker.com/products/docker-desktop/
 * Dockerhub account: https://hub.docker.com/
+* kubectl to interact with the Kubernetes cluster
 
 # Docker session
 ## Build the application docker container
@@ -51,10 +53,23 @@ Then the application can be accessed on: `http://app.127.0.0.1.nip.io:8080/`
 
 # Kubernetes session
 
+## Unpack binaries
+Windows: <br>
+`unzip bin/kubectl.exe.zip -d bin` <br>
+`unzip bin/k9s_Windows_amd64.zip -d bin`
+
+Linux: <br>
+`tar -xvzf bin/k9s_Linux_amd64.tar.gz -C bin/` <br>
+`tar -xvzf bin/kubectl-linux.tar.gz -C bin/` 
+
 ## Starting local kubernetes cluster
 To start a local kubernetes cluster based on the k3d distribution, run the following command in the project root directory from powershell
 
-`.\bin\k3d.exe cluster create --config .\config.yml`
+`.\bin\k3d.exe cluster create mycluster --config .\config.yml`
+
+Getting the cluster’s kubeconfig (included in k3d cluster create)
+
+`.\bin\k3d.exe kubeconfig merge mycluster --kubeconfig-switch-context`
 
 When the cluster is started, check that you are able to communicate with the cluster by retrieving a list of all active nodes in the cluster:
 
@@ -68,8 +83,23 @@ k3d-mycluster-agent-0    Ready    <none>                 113s   v1.27.4+k3s1
 k3d-mycluster-agent-1    Ready    <none>                 112s   v1.27.4+k3s1
 ```
 
+For more info on the .yaml contents visit https://k3d.io/v5.7.4/usage/configfile/
+
 ### Import image locally (if not using dockerhub)
 `./bin/k3d.exe image import nctamu/nc-k8s-ws:1.0.0 --cluster mycluster`
+
+Check that the image has been imported:
+
+`docker exec k3d-mycluster-server-0 crictl images`
+```
+docker exec k3d-mycluster-server-0 crictl images
+IMAGE                                      TAG                    IMAGE ID            SIZE
+docker.io/nctamu/nc-k8s-ws                 1.0.0                  6856cef227afb       517MB
+docker.io/rancher/klipper-helm             v0.8.0-build20230510   6f42df210d7fa       95MB
+docker.io/rancher/klipper-lb               v0.4.4                 af74bd845c4a8       4.92MB
+docker.io/rancher/local-path-provisioner   v0.0.24                b29384aeb4b13       14.9MB
+docker.io/rancher/mirrored-pause           3.6                    6270bb605e12e       301kB
+``` 
 
 ## Deploy application to kubernetes
 Interaction with kubernetes is normally done using the cli tool `kubectl` and the same applies for deployment. Open powershell again in the root directory and run `.\bin\kubectl.exe apply -k .\application\k8s-simple\`
