@@ -59,8 +59,14 @@ Windows: <br>
 `unzip bin/k9s_Windows_amd64.zip -d bin`
 
 Linux: <br>
-`tar -xvzf bin/k9s_Linux_amd64.tar.gz -C bin/` <br>
-`tar -xvzf bin/kubectl-linux.tar.gz -C bin/` 
+`tar -xvzf bin/kubectl-linux.tar.gz -C bin/` <br>
+`tar -xvzf bin/k9s_Linux_amd64.tar.gz -C bin/`
+
+Mac (arm?): <br>
+k3d: `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh` <br>
+kubectl: `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"` <br>
+`chmod +x ./kubectl`
+
 
 ## Starting local kubernetes cluster
 To start a local kubernetes cluster based on the k3d distribution, run the following command in the project root directory from powershell
