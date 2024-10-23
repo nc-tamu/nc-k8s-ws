@@ -63,7 +63,7 @@ Linux: <br>
 `tar -xvzf bin/k9s_Linux_amd64.tar.gz -C bin/`
 
 Mac (arm?): <br>
-k3d: `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh` <br>
+k3d: `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash` <br>
 kubectl: `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"` <br>
 `chmod +x ./kubectl`
 
