@@ -4,13 +4,15 @@
 * Dockerhub account: https://hub.docker.com/
 * kubectl to interact with the Kubernetes cluster
 
+Note: the commands in the readme are written for powershell, so remember to edit them and flip the \ to / where needed :)
+
 # Docker session
 ## Build the application docker container
 To start the build process, run the following command which targets the 'application' folder:
 
 Example: `docker build -t docker-hub-username/name-of-container:version application\.`
 
-This will build the docker container in the current directory and tag it with according to the parameter defined in `-t`. An example of a real world build is: 
+This will build the docker container in the current directory and tag it with according to the parameter defined in `-t`. An example of a real world build for my user 'nctamu' is: 
 
 `docker build -t nctamu/nc-k8s-ws:1.0.0 application\.`
 
@@ -45,7 +47,7 @@ Ps. if using a private registry, it will be necessary to provide the full url to
 ## Start the docker container locally
 The container can be started immediately after the image is built locally so it is not required to be pushed to an external registry. To start the application locally, use the following command:
 
-`docker run -it -p 8080:8080 docker-hub-username/name-of-container:version`
+`docker run -it --rm -p 8080:8080 docker-hub-username/name-of-container:version`
 
 Example: `docker run -it -p 8080:8080 nctamu/nc-k8s-ws:1.0.0` 
 
@@ -63,9 +65,12 @@ Linux: <br>
 `tar -xvzf bin/k9s_Linux_amd64.tar.gz -C bin/`
 
 Mac (arm?): <br>
-k3d: `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash` <br>
-kubectl: `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"` <br>
-`chmod +x ./kubectl`
+k3d: 
+* `curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash`
+
+kubectl: 
+* `curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/darwin/arm64/kubectl"`
+* `chmod +x ./kubectl`
 
 
 ## Starting local kubernetes cluster
